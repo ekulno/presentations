@@ -3,34 +3,29 @@ title: Introduction to Git
 author: ekulno
 ---
 
-What is git? 
+Overview of Git
 ---
 
-Git is a version control system (VCS) used to manage and track changes in source code.
+# What is Git? 
 
-<!-- pause -->
+Git is a version control system (VCS). 
+
  - Created by Linus Torvalds in 2005
-<!-- pause -->
  - Used by > 100 million developers
-<!-- pause -->
  - Enables collaboration and management of codebases
 
-<!-- end_slide -->
+<!--pause-->
 
-Why use git? 
----
+# Why use Git? 
 
  - Version Control: Keep track of changes, revert to previous versions, and manage multiple versions of your project.
-<!-- pause -->
  - Collaboration: Multiple developers can work on the same project simultaneously.
-<!-- pause -->
  - Branching and Merging: Experiment with new features or fixes in isolated branches, then merge them back into the main project.
-<!-- pause -->
  - Backup: Your entire project history is saved in Git, reducing the risk of data loss.
 
 <!-- end_slide -->
 
-Key git concepts: Commits
+Commits
 ---
 
 A commit is a set of removals and additions of lines of code. 
@@ -46,6 +41,20 @@ public class Hello1
 }
 ```
 
+<!--pause-->
+
+Commits are uniquely identified by a hash and are annotated with 'commit messages', which describe the changes in a human-friendly way. 
+
+```
+commit 9dd554d9436b25f2fcc3a182c2f94b5dcaae06fa
+Author: Eirik Kultorp <retracted-email@example.com>
+Date:   Fri Aug 16 09:00:42 2024 +0200
+
+    enable compiler optimizations
+```
+
+<!--pause-->
+
 Commits are organized as linked lists. The state of a codebase at any time can be reconstructed by applying each previous commit in sequence. 
 
 ```mermaid +render
@@ -55,10 +64,8 @@ gitGraph
    commit
 ```
 
-Commits are uniquely identified by a hash and are annotated with 'commit messages', which describe the changes in a human-friendly way. 
-
 <!-- end_slide -->
-Key git concepts: Branches
+Git Branches
 ---
 
 Commit chains can have **branches**. 
@@ -70,8 +77,9 @@ gitGraph
    branch branch-x
    checkout branch-x
    commit id: "C"
-   commit id: "D"
    checkout main
+   commit id: "D"
+   checkout branch-x
    commit id: "E"
 ```
 
@@ -82,7 +90,7 @@ Typical use cases:
  - create a new release
 
 <!-- end_slide -->
-Key git concepts: Merging branches
+Merging branches
 ---
 
 Branches can me **merged**. 
@@ -94,11 +102,12 @@ gitGraph
    branch branch-x
    checkout branch-x
    commit id: "C"
-   commit id: "D"
    checkout main
+   commit id: "D"
+   checkout branch-x
    commit id: "E"
+   checkout main
    merge branch-x id: "F"
-   commit id: "G"
 ```
 <!-- pause -->
 
@@ -106,18 +115,20 @@ Typical use cases:
  - include a new feature into the main branch
  - include a hotfix to a release branch
 
+<!-- pause -->
+
 # Merge conflicts
 
-What if commits X and Y conflict? 
+What if commits C and D conflict? 
 
-## X 
+## C 
 
 ```diff
 -      System.Console.WriteLine("Hello, World!");
 +      System.Console.WriteLine("Greetings, friends!");
 ```
 
-## Y 
+## D 
 
 ```diff
 -      System.Console.WriteLine("Hello, World!");
